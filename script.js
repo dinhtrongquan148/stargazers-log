@@ -2,16 +2,40 @@ const statusElement = document.querySelector("#status");
 const repositoryList = document.querySelector("#repositories");
 
 function formatDate(dateString) {
-  const date = new Date(`${dateString}T00:00:00`);
-
-  if (Number.isNaN(date.getTime())) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+  if (!match) {
     throw new Error(`Invalid starred_at date: ${dateString}`);
   }
 
+  const [, yearString, monthString, dayString] = match;
+  const year = Number(yearString);
+  const month = Number(monthString);
+  const day = Number(dayString);
+  const daysInMonth = [
+    31,
+    year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+  ];
+
+  if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
+    throw new Error(`Invalid starred_at date: ${dateString}`);
+  }
+
+  const date = new Date(`${dateString}T00:00:00Z`);
   return new Intl.DateTimeFormat(undefined, {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   }).format(date);
 }
 
