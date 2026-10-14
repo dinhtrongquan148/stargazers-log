@@ -1,0 +1,17 @@
+[
+  {
+    "repo": "golang/go",
+    "description": "The Go programming language.",
+    "starred_at": "2025-11-08"
+  },
+  {
+    "repo": "microsoft/vscode",
+    "description": "Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.",
+    "starred_at": "2025-09-21"
+  },
+  {
+    "repo": "cli/cli",
+    "description": "GitHub’s official command line tool.",
+    "starred_at": "2025-06-14"
+  }
+]
